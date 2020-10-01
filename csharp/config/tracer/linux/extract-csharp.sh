@@ -1,7 +1,7 @@
 #!/bin/bash
 echo extract-csharp.sh: Called with arguments: "$@"
 
-extractor=$SEMMLE_PLATFORM_TOOLS/csharp/Semmle.Extraction.CSharp.Driver
+extractor=$ODASA_TOOLS/extract.sh
 
 for i in "$@"
 do
