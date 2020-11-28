@@ -1066,6 +1066,17 @@ private predicate flowThroughCall(
   )
 }
 
+pragma[noinline]
+private predicate basicRelevantStoreStep(
+  string prop, DataFlow::Configuration cfg, DataFlow::Node pred, DataFlow::Node succ
+) {
+  isRelevant(pred, cfg) and
+  basicStoreStep(pred, succ, prop)
+  or
+  isRelevant(pred, cfg) and
+  isAdditionalStoreStep(pred, succ, prop, cfg)
+}
+
 /**
  * Holds if `pred` may flow into property `prop` of `succ` under configuration `cfg`
  * along a path summarized by `summary`.
@@ -1075,13 +1086,9 @@ private predicate storeStep(
   DataFlow::Node pred, DataFlow::Node succ, string prop, DataFlow::Configuration cfg,
   PathSummary summary
 ) {
-  isRelevant(pred, cfg) and
-  basicStoreStep(pred, succ, prop) and
-  summary = PathSummary::level()
-  or
-  isRelevant(pred, cfg) and
-  isAdditionalStoreStep(pred, succ, prop, cfg) and
-  summary = PathSummary::level()
+  basicRelevantStoreStep(prop, cfg, pred, succ) and
+  summary = PathSummary::level() and
+  prop = getARelevantLoadAndStoreProperty(cfg)
   or
   exists(Function f, DataFlow::Node mid, DataFlow::Node invk |
     not f.isAsyncOrGenerator() and invk = succ
