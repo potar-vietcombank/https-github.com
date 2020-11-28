@@ -1247,7 +1247,8 @@ private predicate loadStep(
   summary = PathSummary::level() and
   prop = getARelevantLoadAndStoreProperty(cfg)
   or
-  parameterPropRead(pred, prop, succ, cfg, summary)
+  parameterPropRead(pred, prop, succ, cfg, summary) and
+  prop = getARelevantLoadAndStoreProperty(cfg)
 }
 
 /**
