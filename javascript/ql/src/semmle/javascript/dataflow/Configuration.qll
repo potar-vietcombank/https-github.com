@@ -817,6 +817,41 @@ private predicate exploratoryLoadStep(
 }
 
 /**
+ * Gets a property that is used both in a relevant load and a relevant store.
+ * A relevant load/store is one that has been found during the exploratory flow.
+ */
+pragma[noinline]
+private string getARelevantLoadAndStoreProperty(DataFlow::Configuration cfg) {
+  result = getAPropertyUsedInLoadStore(cfg)
+  or
+  result = getARelevantLoadProperty(cfg) and result = getARelevantStoreProperty(cfg)
+}
+
+/**
+ * Gets a property where a store-step with that property has been found during the exploratory flow.
+ * Outlined to give the compiler a hint about the join-order.
+ */
+pragma[noinline]
+private string getARelevantStoreProperty(DataFlow::Configuration cfg) {
+  exists(DataFlow::Node mid | isRelevant(mid, cfg) |
+    basicStoreStep(mid, _, result) or
+    isAdditionalStoreStep(mid, _, result, cfg)
+  )
+}
+
+/**
+ * Gets a property where a load-step with that property has been found during the exploratory flow.
+ * Outlined to give the compiler a hint about the join-order.
+ */
+pragma[noinline]
+private string getARelevantLoadProperty(DataFlow::Configuration cfg) {
+  exists(DataFlow::Node mid | isRelevant(mid, cfg) |
+    basicLoadStep(mid, _, result) or
+    isAdditionalLoadStep(mid, _, result, cfg)
+  )
+}
+
+/**
  * Gets a property where the forwards exploratory flow has found a relevant store-step with that property.
  * The property is therefore relevant for load-steps in the forward exploratory flow.
  *
