@@ -1101,15 +1101,23 @@ private predicate storeStep(
     // and `succ` is an invocation of `f`
     reachableFromInput(f, invk, pred, mid, cfg, summary) and
     (
-      returnedPropWrite(f, _, prop, mid)
-      or
-      exists(DataFlow::SourceNode base | base.flowsToExpr(f.getAReturnedExpr()) |
-        isAdditionalStoreStep(mid, base, prop, cfg)
-      )
+      helper(f, prop, mid, cfg)
       or
       invk instanceof DataFlow::NewNode and
-      receiverPropWrite(f, prop, mid)
-    )
+      receiverPropWrite(f, prop, mid) and
+      prop = getARelevantLoadAndStoreProperty(cfg)
+      )
+  )
+}
+
+// TODO: Doc
+private predicate helper(Function f, string prop, DataFlow::Node mid, DataFlow::Configuration cfg) {
+  returnedPropWrite(f, _, prop, mid) and
+  prop = getARelevantLoadAndStoreProperty(cfg)
+      or
+  exists(DataFlow::SourceNode base | base.flowsToExpr(f.getAReturnedExpr()) |
+    isAdditionalStoreStep(mid, base, prop, cfg) and
+    prop = getARelevantLoadAndStoreProperty(cfg)
   )
 }
 
