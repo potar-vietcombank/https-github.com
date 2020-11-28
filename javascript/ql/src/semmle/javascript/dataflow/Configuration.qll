@@ -1219,6 +1219,23 @@ private predicate isAdditionalLoadStoreStep(
 }
 
 /**
+ * Holds there exists a basic load-step, that was found to be relevant during the exploratory flow,
+ * such that property `prop` of `pred` may flow into `succ` under configuration `cfg`.
+ *
+ * Is outlined to give the compiler a hint about join-order.
+ */
+pragma[noinline]
+private predicate basicRelevantLoadStep(
+  DataFlow::Node pred, DataFlow::Node succ, string prop, DataFlow::Configuration cfg
+) {
+  isRelevant(pred, cfg) and
+  basicLoadStep(pred, succ, prop)
+  or
+  isRelevant(pred, cfg) and
+  isAdditionalLoadStep(pred, succ, prop, cfg)
+}
+
+/**
  * Holds if property `prop` of `pred` may flow into `succ` along a path summarized by
  * `summary`.
  */
@@ -1226,13 +1243,9 @@ private predicate loadStep(
   DataFlow::Node pred, DataFlow::Node succ, string prop, DataFlow::Configuration cfg,
   PathSummary summary
 ) {
-  isRelevant(pred, cfg) and
-  basicLoadStep(pred, succ, prop) and
-  summary = PathSummary::level()
-  or
-  isRelevant(pred, cfg) and
-  isAdditionalLoadStep(pred, succ, prop, cfg) and
-  summary = PathSummary::level()
+  basicRelevantLoadStep(pred, succ, prop, cfg) and
+  summary = PathSummary::level() and
+  prop = getARelevantLoadAndStoreProperty(cfg)
   or
   parameterPropRead(pred, prop, succ, cfg, summary)
 }
