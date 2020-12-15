@@ -1,3 +1,15 @@
+| highlight.js:6:12:6:695 | (Add\|Clear\|Close\|Copy\|Enter\|Exit\|Find\|Format\|Get\|Hide\|Join\|Lock\|Move\|New\|Open\|Optimize\|Pop\|Push\|Redo\|Remove\|Rename\|Reset\|Resize\|Search\|Select\|Set\|Show\|Skip\|Split\|Step\|Switch\|Undo\|Unlock\|Watch\|Backup\|Checkpoint\|Compare\|Compress\|Convert\|ConvertFrom\|ConvertTo\|Dismount\|Edit\|Expand\|Export\|Group\|Import\|Initialize\|Limit\|Merge\|New\|Out\|Publish\|Restore\|Save\|Sync\|Unpublish\|Update\|Approve\|Assert\|Complete\|Confirm\|Deny\|Disable\|Enable\|Install\|Invoke\|Register\|Request\|Restart\|Resume\|Start\|Stop\|Submit\|Suspend\|Uninstall\|Unregister\|Wait\|Debug\|Measure\|Ping\|Repair\|Resolve\|Test\|Trace\|Connect\|Disconnect\|Read\|Receive\|Send\|Write\|Block\|Grant\|Protect\|Revoke\|Unblock\|Unprotect\|Use\|ForEach\|Sort\|Tee\|Where)+ | it can start matching anywhere |
+| highlight.js:7:13:7:692 | (Add\|Clear\|Close\|Copy\|Enter\|Exit\|Find\|Format\|Get\|Hide\|Join\|Lock\|Move\|New\|Open\|Optimize\|Pop\|Push\|Redo\|Remove\|Rename\|Reset\|Resize\|Search\|Select\|Set\|Show\|Skip\|Split\|Step\|Switch\|Undo\|Unlock\|Watch\|Backup\|Checkpoint\|Compare\|Compress\|Convert\|ConvertFrom\|ConvertTo\|Dismount\|Edit\|Expand\|Export\|Group\|Import\|Initialize\|Limit\|Merge\|Out\|Publish\|Restore\|Save\|Sync\|Unpublish\|Update\|Approve\|Assert\|Complete\|Confirm\|Deny\|Disable\|Enable\|Install\|Invoke\|Register\|Request\|Restart\|Resume\|Start\|Stop\|Submit\|Suspend\|Uninstall\|Unregister\|Wait\|Debug\|Measure\|Ping\|Repair\|Resolve\|Test\|Trace\|Connect\|Disconnect\|Read\|Receive\|Send\|Write\|Block\|Grant\|Protect\|Revoke\|Unblock\|Unprotect\|Use\|ForEach\|Sort\|Tee\|Where)+ | it can start matching anywhere |
+| highlight.js:14:12:14:54 | ([ ]*[a-z0-9&#*=?@\\\\><:,()$[\\]_.{}!+%^-]+)+ | it can start matching anywhere |
+| highlight.js:14:13:14:16 | [ ]* | it can start matching anywhere |
+| highlight.js:14:17:14:52 | [a-z0-9&#*=?@\\\\><:,()$[\\]_.{}!+%^-]+ | it can start matching anywhere |
+| highlight.js:18:12:18:77 | ('.*?'\|".*?"\|\\[.*?\\]\|[^\\s!"#%&'()*+,.\\/;<=>@\\[\\\\\\]^`{\|}~]+\|\\.\|\\/)+ | it can start matching anywhere |
+| highlight.js:18:14:18:16 | .*? | it can start matching anywhere after the start of the preceeding ''' |
+| highlight.js:18:20:18:22 | .*? | it can start matching anywhere after the start of the preceeding '"' |
+| highlight.js:18:27:18:29 | .*? | it can start matching anywhere after the start of the preceeding '\\[' |
+| highlight.js:18:33:18:69 | [^\\s!"#%&'()*+,.\\/;<=>@\\[\\\\\\]^`{\|}~]+ | it can start matching anywhere |
+| highlight.js:22:12:22:82 | ((decltype\\(auto\\)\|(?:[a-zA-Z_]\\w*::)?[a-zA-Z_]\\w*(?:<.*?>)?)[\\*&\\s]+)+ | it can start matching anywhere |
+| highlight.js:23:13:23:82 | ((decltype\\(auto\\)\|([a-zA-Z_]\\w*::)?[a-zA-Z_]\\w*(<[^<>]+>)?)[\\*&\\s]+)+ | it can start matching anywhere |
 | polynomial-redos.js:7:24:7:26 | \\s+ | it can start matching anywhere |
 | polynomial-redos.js:8:17:8:18 |  * | it can start matching anywhere |
 | polynomial-redos.js:9:19:9:21 | \\s* | it can start matching anywhere |
@@ -290,3 +302,12 @@
 | tst.js:329:14:329:20 | (c?a?)* | it can start matching anywhere |
 | tst.js:332:14:332:22 | (?:a\|a?)+ | it can start matching anywhere |
 | tst.js:335:14:335:20 | (a?b?)* | it can start matching anywhere |
+| tst.js:344:15:344:16 | a* | it can start matching anywhere |
+| tst.js:347:14:347:18 | (a*)* | it can start matching anywhere |
+| tst.js:347:15:347:16 | a* | it can start matching anywhere |
+| tst.js:348:14:348:18 | (a+)* | it can start matching anywhere |
+| tst.js:348:15:348:16 | a+ | it can start matching anywhere |
+| tst.js:349:14:349:18 | (a*)+ | it can start matching anywhere |
+| tst.js:349:15:349:16 | a* | it can start matching anywhere |
+| tst.js:350:14:350:18 | (a+)+ | it can start matching anywhere |
+| tst.js:350:15:350:16 | a+ | it can start matching anywhere |
