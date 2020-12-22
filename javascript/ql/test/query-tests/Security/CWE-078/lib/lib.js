@@ -350,3 +350,9 @@ Object.defineProperty(module.exports, "boundProblem", {
 		return boundProblem.bind(this, "safe");
 	}
 });
+
+module.exports.typeofNumber = function(n) {
+	if (typeof n === "number") {
+		cp.exec("rm -rf " + n); // OK
+	}
+};
