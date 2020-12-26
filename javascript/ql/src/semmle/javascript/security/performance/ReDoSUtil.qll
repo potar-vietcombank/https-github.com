@@ -190,13 +190,10 @@ private predicate sharesRoot(TInputSymbol a, TInputSymbol b) {
  * Holds if the `a` is an input symbol from a regexp that has root `root`.
  */
 private predicate belongsTo(TInputSymbol a, RegExpRoot root) {
-  exists(RegExpTerm term | getRoot(term) = root |
-    a = Char(term.(RegexpCharacterConstant).getValue().charAt(_))
-  )
-  or
-  exists(string str, RegExpTerm term | a = CharClass(str) |
-    term.toString() = str and
-    getRoot(term) = root
+  exists(State s | getRoot(s.getRepr()) = root |
+    delta(s, a, _)
+    or
+    delta(_, a, s)
   )
 }
 
