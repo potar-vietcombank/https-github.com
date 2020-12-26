@@ -672,36 +672,32 @@ private string getAOverlapBetweenCharacterClasses(CharacterClass c, CharacterCla
  * Gets a character that is represented by both `c` and `d`.
  */
 string intersect(InputSymbol c, InputSymbol d) {
-  c = Char(result) and
-  d = getAnInputSymbolMatching(result) and
+  sharesRoot(c, d) and
   (
-    sharesRoot(c, d)
+    c = Char(result) and
+    d = getAnInputSymbolMatching(result)
     or
-    d = Dot()
+    result = getMinOverlapBetweenCharacterClasses(c, d)
     or
-    d = Any()
+    result = c.(CharacterClass).choose() and
+    (
+      d = c
+      or
+      d = Dot() and
+      not (result = "\n" or result = "\r")
+      or
+      d = Any()
+    )
+    or
+    c = Dot() and
+    (
+      d = Dot() and result = "a"
+      or
+      d = Any() and result = "a"
+    )
+    or
+    c = Any() and d = Any() and result = "a"
   )
-  or
-  result = getMinOverlapBetweenCharacterClasses(c, d)
-  or
-  result = c.(CharacterClass).choose() and
-  (
-    d = c
-    or
-    d = Dot() and
-    not (result = "\n" or result = "\r")
-    or
-    d = Any()
-  )
-  or
-  c = Dot() and
-  (
-    d = Dot() and result = "a"
-    or
-    d = Any() and result = "a"
-  )
-  or
-  c = Any() and d = Any() and result = "a"
   or
   result = intersect(d, c)
 }
