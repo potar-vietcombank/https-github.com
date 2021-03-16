@@ -12,7 +12,6 @@ jobs:
     steps:
       - name: Fail if no change note found. To fix, either add one, or add the `no-change-note-required` label.
         if: |
-          github.event.pull_request.draft == false &&
           !contains(github.event.pull_request.labels.*.name, 'no-change-note-required')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
