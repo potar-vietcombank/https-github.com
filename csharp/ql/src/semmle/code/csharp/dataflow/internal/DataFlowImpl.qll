@@ -1246,7 +1246,8 @@ private module Stage2 {
     exists(ReturnNodeExt ret, Ap ap0, ReturnKindExt kind, int pos |
       parameterFlow(p, ap, ap0, c, config) and
       c = getNodeEnclosingCallable(ret) and
-      revFlow(ret, true, apSome(_), ap0, config) and
+      revFlow(pragma[only_bind_into](ret), true, apSome(_), pragma[only_bind_into](ap0),
+        pragma[only_bind_into](config)) and
       fwdFlow(ret, any(CcCall ccc), apSome(ap), pragma[only_bind_into](ap0),
         pragma[only_bind_into](config)) and
       kind = ret.getKind() and
@@ -1928,7 +1929,8 @@ private module Stage3 {
     exists(ReturnNodeExt ret, Ap ap0, ReturnKindExt kind, int pos |
       parameterFlow(p, ap, ap0, c, config) and
       c = getNodeEnclosingCallable(ret) and
-      revFlow(ret, true, apSome(_), ap0, config) and
+      revFlow(pragma[only_bind_into](ret), true, apSome(_), pragma[only_bind_into](ap0),
+        pragma[only_bind_into](config)) and
       fwdFlow(ret, any(CcCall ccc), apSome(ap), pragma[only_bind_into](ap0),
         pragma[only_bind_into](config)) and
       kind = ret.getKind() and
@@ -2684,7 +2686,8 @@ private module Stage4 {
     exists(ReturnNodeExt ret, Ap ap0, ReturnKindExt kind, int pos |
       parameterFlow(p, ap, ap0, c, config) and
       c = getNodeEnclosingCallable(ret) and
-      revFlow(ret, true, apSome(_), ap0, config) and
+      revFlow(pragma[only_bind_into](ret), true, apSome(_), pragma[only_bind_into](ap0),
+        pragma[only_bind_into](config)) and
       fwdFlow(ret, any(CcCall ccc), apSome(ap), pragma[only_bind_into](ap0),
         pragma[only_bind_into](config)) and
       kind = ret.getKind() and
